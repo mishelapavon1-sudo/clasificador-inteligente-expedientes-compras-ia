@@ -1,0 +1,315 @@
+# Clasificación Inteligente de Documentos con AI Builder y Power Automate
+
+Sistema automatizado de clasificación documental utilizando Microsoft Power Platform, AI Builder, SharePoint y Power Automate para análisis de precisión, validación de resultados y evaluación de desempeño del modelo de inteligencia artificial.
+
+# Descripción general
+
+Este proyecto contiene la exportación de un flujo de Microsoft Power Automate diseñado para clasificar automáticamente documentos administrativos utilizando inteligencia artificial mediante AI Builder.
+
+El sistema procesa documentos almacenados en SharePoint, identifica el tipo documental automáticamente y registra métricas de desempeño para evaluar la precisión del modelo IA.
+
+La solución permite:
+
+- Clasificar documentos automáticamente.
+- Comparar tipo real vs tipo detectado.
+- Obtener niveles de confianza.
+- Calcular métricas de desempeño.
+- Evaluar precisión del modelo.
+- Registrar resultados automáticos en SharePoint o Excel.
+
+# Objetivo del proyecto
+
+Automatizar el análisis y clasificación documental mediante inteligencia artificial para validar el rendimiento del modelo AI Builder y medir la precisión de identificación documental.
+
+# Arquitectura de la solución
+
+| Componente | Función |
+|---|---|
+| SharePoint Online | Repositorio documental |
+| Power Automate | Automatización del flujo |
+| AI Builder | Clasificación documental IA |
+| Excel / SharePoint List | Registro de resultados |
+| Power Apps | Interfaz administrativa |
+
+# Tipos documentales procesados
+
+El modelo IA fue entrenado para reconocer los siguientes documentos:
+
+| Tipo documental |
+|---|
+| Cotizaciones |
+| Facturas / Notas de venta |
+| Órdenes de compra / contratos |
+| Notas de recepción |
+| Visados de pago |
+
+# Funcionamiento general del flujo
+
+## Paso 1 – Lectura de documentos
+
+El flujo obtiene documentos almacenados en SharePoint organizados por carpetas documentales.
+
+### Ejemplo de estructura
+
+```plaintext
+Documentos/
+│
+├── Cotizaciones
+├── Facturas
+├── OrdenesCompra
+├── Recepciones
+└── VisadosPago
+
+## Paso 2 – Obtención del contenido del archivo
+
+Power Automate descarga automáticamente el contenido del documento.
+
+### Acción utilizada
+
+```plaintext
+Get file content
+```
+
+## Paso 3 – Clasificación mediante IA
+
+El flujo utiliza AI Builder para analizar el documento.
+
+### Acción utilizada
+
+```plaintext
+Predict
+```
+
+### Servicio
+
+```plaintext
+AI Builder
+```
+
+
+## Paso 4 – Comparación de resultados
+
+El flujo compara:
+
+- Tipo documental real.
+- Tipo detectado por IA.
+- Nivel de confianza obtenido.
+
+
+## Paso 5 – Registro de métricas
+
+Los resultados se almacenan automáticamente para evaluación del modelo.
+
+# Métricas evaluadas
+
+El sistema calcula automáticamente métricas de desempeño del modelo IA.
+
+| Métrica | Descripción |
+|---|---|
+| Precisión | Exactitud de clasificación |
+| Recall | Capacidad de detección correcta |
+| F1-Score | Balance entre precisión y recall |
+| Confianza | Nivel de seguridad de la predicción |
+
+# Estructura de resultados
+
+## Campos registrados
+
+| Campo | Descripción |
+|---|---|
+| TipoReal | Tipo documental correcto |
+| TipoDetectado | Resultado IA |
+| Confianza | Nivel de confianza del modelo |
+| Correcto | Validación SI/NO |
+| Precisión | Métrica de precisión |
+| Recall | Métrica recall |
+| F1-Score | Métrica F1 |
+
+
+# Resultados obtenidos
+
+## Métricas generales del modelo
+
+| Métrica global | Resultado |
+|---|---|
+| Precisión general | 100% |
+| Recall promedio | 96% |
+| F1-Score promedio | 98% |
+
+# Resultados por tipo documental
+
+| Tipo documental | Precisión |
+|---|---|
+| Cotizaciones | 95% |
+| Facturas / Notas de venta | 97% |
+| Órdenes de compra / contratos | 97% |
+| Notas de recepción | 100% |
+| Visados de pago | 100% |
+
+# Ejemplo de resultados
+
+| TipoReal | TipoDetectado | Correcto |
+|---|---|---|
+| Cotizaciones | Cotizaciones | SI |
+| Facturas | Facturas | SI |
+| Ordenes de compra | Cotizaciones | NO |
+| Visados de pago | Visados de pago | SI |
+
+
+# Configuración del modelo IA
+
+## AI Builder utilizado
+
+Tipo de modelo:
+
+```plaintext
+Document Processing
+```
+
+# Entrenamiento del modelo
+
+El modelo fue entrenado utilizando documentos reales organizados por categorías documentales.
+
+## Etapas del entrenamiento
+
+1. Carga de documentos.
+2. Etiquetado documental.
+3. Entrenamiento IA.
+4. Publicación del modelo.
+5. Integración con Power Automate.
+
+# Configuración de SharePoint
+
+## Biblioteca documental
+
+Nombre sugerido:
+
+```plaintext
+EXPEDIENTES_IA
+```
+
+## Lista de resultados
+
+Nombre sugerido:
+
+```plaintext
+Resultados_Clasificacion
+```
+
+# Acciones principales del flujo
+
+| Acción | Función |
+|---|---|
+| Get Files | Obtener documentos |
+| Get File Content | Descargar archivos |
+| Predict | Ejecutar IA |
+| Apply to Each | Recorrer documentos |
+| Condition | Comparar resultados |
+| Create Item | Registrar métricas |
+
+# Variables utilizadas
+
+| Variable | Tipo | Función |
+|---|---|---|
+| varTipoReal | String | Tipo documental esperado |
+| varTipoDetectado | String | Resultado IA |
+| varConfianza | Float | Nivel de confianza |
+| varResultado | String | Correcto o incorrecto |
+
+# Requisitos
+
+Para ejecutar correctamente este flujo se requiere:
+
+- Microsoft 365.
+- Power Automate Premium.
+- AI Builder Credits.
+- SharePoint Online.
+- Permisos sobre bibliotecas documentales.
+- Acceso a AI Builder.
+
+# Cómo importar el flujo
+
+1. Ingresar a Microsoft Power Automate.
+2. Seleccionar **Importar**.
+3. Cargar el archivo ZIP exportado.
+4. Configurar conexiones:
+   - SharePoint
+   - AI Builder
+5. Validar autenticaciones.
+6. Ejecutar pruebas del modelo.
+
+# Recomendaciones
+
+- Entrenar el modelo con documentos reales.
+- Mantener calidad de escaneo.
+- Utilizar suficientes ejemplos por categoría.
+- Validar periódicamente las métricas.
+- Reentrenar el modelo ante nuevos formatos.
+
+# Ventajas
+
+- Automatiza clasificación documental.
+- Reduce revisión manual.
+- Mejora tiempos de procesamiento.
+- Permite análisis masivo de documentos.
+- Genera métricas automáticas del modelo.
+
+# Limitaciones
+
+- La precisión depende del entrenamiento IA.
+- Documentos de baja calidad afectan resultados.
+- Cambios en formatos pueden requerir reentrenamiento.
+- AI Builder requiere licenciamiento adicional.
+
+# Casos de uso
+
+Este proyecto puede utilizarse en:
+
+- Gestión documental.
+- Auditorías administrativas.
+- Validación de expedientes.
+- Automatización de compras.
+- Clasificación documental inteligente.
+- Evaluación de modelos IA.
+
+# Estructura recomendada del repositorio
+
+```plaintext
+clasificacion-documental-ia/
+│
+├── README.md
+├── FLUJOPOWERAUTOMATEIA.zip
+├── resultados/
+├── imagenes/
+├── metricas/
+└── documentacion/
+```
+
+# Tecnologías utilizadas
+
+- Microsoft Power Automate
+- Microsoft SharePoint Online
+- Microsoft AI Builder
+- Power Apps
+- Excel Online
+
+# Autor / Responsable
+
+Agregar responsable técnico o área encargada.
+
+Ejemplo:
+
+- Automatización de procesos
+- Inteligencia artificial aplicada
+- Gestión documental
+- Departamento TI
+
+
+# Versión
+
+- Versión inicial exportada: Mayo 2026
+
+
+# Notas adicionales
+
+Este proyecto incorpora inteligencia artificial mediante AI Builder para clasificación automática de documentos y evaluación de desempeño utilizando métricas de precisión, recall y F1-score.
